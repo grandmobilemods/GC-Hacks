@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grand RP Premium Mods</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#0f172a;
+color:white;
+text-align:center;
+}
+
+.container{
+padding:20px;
+}
+
+button{
+padding:15px 25px;
+border:none;
+border-radius:10px;
+font-size:18px;
+cursor:pointer;
+margin:10px;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+.card{
+background:#1e293b;
+padding:20px;
+margin:15px auto;
+border-radius:15px;
+width:300px;
+box-shadow:0 0 20px rgba(0,0,0,0.5);
+}
+
+.blue{
+background:#3b82f6;
+color:white;
+}
+
+.green{
+background:#22c55e;
+}
+
+.price{
+font-size:22px;
+margin:10px;
+}
+
+.feature{
+text-align:left;
+margin:8px 0;
+}
+
+.hidden{
+display:none;
+}
+
+.verify{
+font-size:22px;
+margin-top:200px;
+}
+
+.loader{
+border:6px solid #222;
+border-top:6px solid #3b82f6;
+border-radius:50%;
+width:60px;
+height:60px;
+margin:auto;
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
+.qr{
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- Verification Screen -->
+
+<div id="verifyScreen" class="verify">
+
+<div class="loader"></div>
+
+<h2>Verifying User...</h2>
+
+<p id="verifyText">Please Wait...</p>
+
+</div>
+
+
+<!-- Main Menu -->
+
+<div id="mainMenu" class="hidden container">
+
+<h1>Grand RP Premium Store</h1>
+
+<button class="green" onclick="openNormal()">
+Grand RP Normal Mods 💪
+</button>
+
+<button class="green" onclick="openGC()">
+Grand RP Unlimited GC 🪙
+</button>
+
+</div>
+
+
+
+<!-- Normal Mods -->
+
+<div id="normalMods" class="hidden container">
+
+<h2>Normal Mods Plans</h2>
+
+<div class="card">
+
+<div class="price">₹120 --- 1 DAY</div>
+<button onclick="selectPlan(120,'normal')">Select</button>
+
+<div class="price">₹299 --- 3 DAYS</div>
+<button onclick="selectPlan(299,'normal')">Select</button>
+
+<div class="price">₹539 --- 7 DAYS</div>
+<button onclick="selectPlan(539,'normal')">Select</button>
+
+<div class="price">₹899 --- 30 DAYS</div>
+<button onclick="selectPlan(899,'normal')">Select</button>
+
+</div>
+
+</div>
+
+
+
+<!-- Unlimited GC -->
+
+<div id="gcMods" class="hidden container">
+
+<h2>Unlimited GC Plans</h2>
+
+<div class="card">
+
+<div class="price">₹1999 --- 30 Days</div>
+<button onclick="selectPlan(1999,'gc')">Select</button>
+
+<div class="price">₹2500 --- Permanent ✅</div>
+<button onclick="selectPlan(2500,'gc')">Select</button>
+
+</div>
+
+</div>
+
+
+
+<!-- Features Page -->
+
+<div id="features" class="hidden container">
+
+<h2>Features</h2>
+
+<div class="card" id="featureList">
+
+</div>
+
+<button class="blue" onclick="goPayment()">
+Add To Cart
+</button>
+
+</div>
+
+
+
+<!-- Payment Page -->
+
+<div id="payment" class="hidden container">
+
+<h1>Pay Money 🤑</h1>
+
+<h2 id="payAmount"></h2>
+
+<div class="qr">
+<img id="qrImg">
+</div>
+
+<p>UPI ID : anuragban@fam</p>
+
+<p>Pay money to continue</p>
+
+</div>
+
+
+
+<script>
+
+let selectedPrice=0
+let planType=""
+
+setTimeout(()=>{
+document.getElementById("verifyScreen").style.display="none"
+document.getElementById("mainMenu").classList.remove("hidden")
+},6000)
+
+
+
+function openNormal(){
+
+hideAll()
+
+document.getElementById("normalMods").classList.remove("hidden")
+
+}
+
+
+function openGC(){
+
+hideAll()
+
+document.getElementById("gcMods").classList.remove("hidden")
+
+}
+
+
+
+function selectPlan(price,type){
+
+selectedPrice=price
+planType=type
+
+hideAll()
+
+document.getElementById("features").classList.remove("hidden")
+
+let list=document.getElementById("featureList")
+
+let features=`
+
+<div class="feature">> 𝙏𝙚𝙡𝙚𝙥𝙤𝙧𝙩 🌀</div>
+<div class="feature">> 𝘾𝙖𝙧 𝙁𝙡𝙮 ✈️</div>
+<div class="feature">> 𝙐𝙣𝙡𝙞𝙢𝙞𝙩𝙚𝙙 𝘼𝙧𝙢𝙤𝙧 🪖</div>
+<div class="feature">> 𝘼𝙡𝙡 𝙂𝙪𝙣𝙨 (RPG) 🔫</div>
+<div class="feature">> 𝘼𝙞𝙢𝙗𝙤𝙩 🎯</div>
+<div class="feature">> 𝙎𝙥𝙚𝙚𝙙 𝙃𝙖𝙘𝙠 ⚡</div>
+<div class="feature">> 𝙅𝙪𝙢𝙥 𝙃𝙖𝙘𝙠 💨</div>
+`
+
+if(type=="gc"){
+
+features+=`
+
+<div class="feature">> 𝙐𝙣𝙡𝙞𝙢𝙞𝙩𝙚𝙙 𝙂𝘾 🪙</div>
+<div class="feature">> 𝙐𝙣𝙡𝙞𝙢𝙞𝙩𝙚𝙙 💵</div>
+
+`
+
+}
+
+list.innerHTML=features
+
+}
+
+
+
+function goPayment(){
+
+hideAll()
+
+document.getElementById("payment").classList.remove("hidden")
+
+document.getElementById("payAmount").innerText="Amount : ₹"+selectedPrice
+
+document.getElementById("qrImg").src=
+"https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi://pay?pa=anuragban@fam&pn=GrandRP&am="+selectedPrice
+
+}
+
+
+
+function hideAll(){
+
+document.getElementById("mainMenu").classList.add("hidden")
+document.getElementById("normalMods").classList.add("hidden")
+document.getElementById("gcMods").classList.add("hidden")
+document.getElementById("features").classList.add("hidden")
+document.getElementById("payment").classList.add("hidden")
+
+}
+
+</script>
+
+</body>
+</html>
