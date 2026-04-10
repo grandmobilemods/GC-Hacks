@@ -3,307 +3,258 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Grand RP Premium Mods</title>
+<title>⚡Dark Light Store 🤖</title>
 
 <style>
+body {margin:0;font-family:Arial;background:#0f172a;color:white;text-align:center;}
+.section{display:none;padding:20px;}
+.active{display:block;}
 
-body{
-margin:0;
-font-family:Arial;
-background:#0f172a;
-color:white;
-text-align:center;
-}
-
-.container{
-padding:20px;
-}
-
-button{
-padding:15px 25px;
-border:none;
-border-radius:10px;
-font-size:18px;
-cursor:pointer;
-margin:10px;
-transition:0.3s;
-}
-
-button:hover{
-transform:scale(1.05);
+.btn{
+background:linear-gradient(45deg,#00c6ff,#0072ff);
+border:none;padding:12px;margin:10px;border-radius:12px;
+color:white;font-size:16px;cursor:pointer;width:80%;
 }
 
 .card{
-background:#1e293b;
-padding:20px;
-margin:15px auto;
-border-radius:15px;
-width:300px;
-box-shadow:0 0 20px rgba(0,0,0,0.5);
+background:#1e293b;margin:10px;padding:15px;
+border-radius:12px;cursor:pointer;
 }
 
-.blue{
-background:#3b82f6;
-color:white;
+.selected{
+border:2px solid #00c6ff;
+background:#334155;
+box-shadow:0 0 15px #00c6ff;
 }
 
-.green{
-background:#22c55e;
+.cart-btn{background:#2563eb;opacity:0.5;}
+.cart-active{opacity:1;}
+.back-btn{background:#374151;}
+
+.tick{color:#22c55e;}
+.cross{color:#ef4444;}
+
+.footer{
+position:fixed;bottom:0;width:100%;
+background:#020617;padding:10px;
 }
 
-.price{
-font-size:22px;
-margin:10px;
+/* Loader */
+#loader{
+position:fixed;width:100%;height:100%;
+background:black;display:flex;
+justify-content:center;align-items:center;
+flex-direction:column;
 }
-
-.feature{
-text-align:left;
-margin:8px 0;
-}
-
-.hidden{
-display:none;
-}
-
-.verify{
-font-size:22px;
-margin-top:200px;
-}
-
-.loader{
-border:6px solid #222;
-border-top:6px solid #3b82f6;
+.loader-box{
+border:5px solid #222;
+border-top:5px solid cyan;
 border-radius:50%;
-width:60px;
-height:60px;
-margin:auto;
+width:60px;height:60px;
 animation:spin 1s linear infinite;
 }
-
-@keyframes spin{
-0%{transform:rotate(0deg);}
-100%{transform:rotate(360deg);}
-}
-
-.qr{
-margin-top:20px;
-}
-
+@keyframes spin{100%{transform:rotate(360deg);}}
 </style>
-
 </head>
 
 <body>
 
-<!-- Verification Screen -->
-
-<div id="verifyScreen" class="verify">
-
-<div class="loader"></div>
-
-<h2>Verifying User...</h2>
-
-<p id="verifyText">Please Wait...</p>
-
+<!-- LOADER -->
+<div id="loader">
+<div class="loader-box"></div>
+<h2>User Verifying ✋🏻</h2>
 </div>
 
+<!-- NEW MAIN SELECT -->
+<div id="main" class="section">
+<h1>🛒 Dark Light Store 🤖</h1>
 
-<!-- Main Menu -->
+<button class="btn" onclick="goTo('home')">🔴Grand RP Mods 🛒</button>
+<button class="btn" onclick="goTo('ff')">🔵 Free Fire Mods 🛒</button>
+</div>
 
-<div id="mainMenu" class="hidden container">
+<!-- FREE FIRE -->
+<div id="ff" class="section">
+<button class="btn back-btn" onclick="goBack()">⬅ Back</button>
+<h2>Free Fire Mods</h2>
 
-<h1>Grand RP Premium Store</h1>
-
-<button class="green" onclick="openNormal()">
-Grand RP Normal Mods 💪
+<button class="btn" onclick="window.location.href='https://ffemote.pro/'">
+All Emotes 👑
 </button>
 
-<button class="green" onclick="openGC()">
-Grand RP Unlimited GC 🪙
+<button class="btn" onclick="goTo('coming')">
+FF Mods Menu 😎
 </button>
-
 </div>
 
-
-
-<!-- Normal Mods -->
-
-<div id="normalMods" class="hidden container">
-
-<h2>Normal Mods Plans</h2>
-
-<div class="card">
-
-<div class="price">₹120 --- 1 DAY</div>
-<button onclick="selectPlan(120,'normal')">Select</button>
-
-<div class="price">₹299 --- 3 DAYS</div>
-<button onclick="selectPlan(299,'normal')">Select</button>
-
-<div class="price">₹539 --- 7 DAYS</div>
-<button onclick="selectPlan(539,'normal')">Select</button>
-
-<div class="price">₹899 --- 30 DAYS</div>
-<button onclick="selectPlan(899,'normal')">Select</button>
-
+<!-- COMING -->
+<div id="coming" class="section">
+<button class="btn back-btn" onclick="goBack()">⬅ Back</button>
+<h1>🚧 New Update Coming Soon 🔜</h1>
+<p>Stay tuned for next update!</p>
 </div>
 
+<!-- ORIGINAL HOME (UNCHANGED) -->
+<div id="home" class="section">
+<h1>🔥 Dark Light Store</h1>
+<button class="btn" onclick="goTo('normal')">1️⃣. Normal Mods 💪</button>
+<button class="btn" onclick="goTo('gc')">2️⃣. Unlimited GC 🪙</button>
 </div>
 
+<!-- NORMAL -->
+<div id="normal" class="section">
+<button class="btn back-btn" onclick="goBack()">⬅ Back</button>
+<h2>Select Plan</h2>
 
+<div class="card" onclick="selectPlan(120,'normal',this)">🔵 ₹120 --- 1 DAY</div>
+<div class="card" onclick="selectPlan(299,'normal',this)">🔴 ₹299 --- 3 DAYS</div>
+<div class="card" onclick="selectPlan(539,'normal',this)">🟡 ₹539 --- 7 DAYS</div>
+<div class="card" onclick="selectPlan(899,'normal',this)">🟢 ₹899 --- 30 DAYS</div>
 
-<!-- Unlimited GC -->
-
-<div id="gcMods" class="hidden container">
-
-<h2>Unlimited GC Plans</h2>
-
-<div class="card">
-
-<div class="price">₹1999 --- 30 Days</div>
-<button onclick="selectPlan(1999,'gc')">Select</button>
-
-<div class="price">₹2500 --- Permanent ✅</div>
-<button onclick="selectPlan(2500,'gc')">Select</button>
-
+<button id="cartBtn" class="btn cart-btn" disabled onclick="goTo('features')">Add to Cart 🛒</button>
 </div>
 
+<!-- GC -->
+<div id="gc" class="section">
+<button class="btn back-btn" onclick="goBack()">⬅ Back</button>
+<h2>Unlimited GC</h2>
+
+<div class="card" onclick="selectPlan(1999,'gc',this)">🟡 ₹1999 --- 30 Days</div>
+<div class="card" onclick="selectPlan(2500,'gc',this)">⭐ ₹2500 --- Permanent</div>
+
+<button id="cartBtn2" class="btn cart-btn" disabled onclick="goTo('features')">Add to Cart 🛒</button>
 </div>
 
-
-
-<!-- Features Page -->
-
-<div id="features" class="hidden container">
-
+<!-- FEATURES -->
+<div id="features" class="section">
+<button class="btn back-btn" onclick="goBack()">⬅ Back</button>
 <h2>Features</h2>
 
-<div class="card" id="featureList">
+<p class="tick">✔ Teleport 🌀</p>
+<p class="tick">✔ Car Fly ✈️</p>
+<p class="tick">✔ Unlimited Armor 🪖</p>
+<p class="tick">✔ All Guns 🔫</p>
+<p class="tick">✔ Aimbot 🎯</p>
+<p class="tick">✔ Speed Hack ⚡</p>
+<p class="tick">✔ Jump Hack 💨</p>
 
+<p id="gcFeature1"></p>
+<p id="gcFeature2"></p>
+
+<button class="btn cart-btn cart-active" onclick="goTo('payment')">Continue ➡</button>
 </div>
 
-<button class="blue" onclick="goPayment()">
-Add To Cart
-</button>
+<!-- PAYMENT -->
+<div id="payment" class="section">
+<button class="btn back-btn" onclick="goBack()">⬅ Back</button>
+<h2>Pay Money 🤑</h2>
+<h1 id="price"></h1>
 
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=anuragban@fam">
+
+<p>UPI: anuragban@fam</p>
+<h3 id="timer">05:00</h3>
 </div>
 
+<!-- FINAL -->
+<div id="final" class="section">
+<h2>Download Section</h2>
 
+<a href="https://www.mediafire.com/file/42bg9s40n4t378s/Dark_Light_V3_Pack.7z/file">
+<button class="btn">Download File 🗃️</button></a>
 
-<!-- Payment Page -->
+<a href="https://discord.gg/4mvjSKZXzG">
+<button class="btn">Join Discord</button></a>
 
-<div id="payment" class="hidden container">
-
-<h1>Pay Money 🤑</h1>
-
-<h2 id="payAmount"></h2>
-
-<div class="qr">
-<img id="qrImg">
+<a href="https://www.mediafire.com/view/2ylpf5wrxfp9sok/file_0000000003cc71fd8930ab8140db587b.png/file">
+<button class="btn">Get Key 🔐</button></a>
 </div>
 
-<p>UPI ID : anuragban@fam</p>
+<!-- SUPPORT -->
+<div id="support" class="section">
+<button class="btn back-btn" onclick="goBack()">⬅ Back</button>
+<h1>Customer Support</h1>
 
-<p>Pay money to continue</p>
-
+<a href="https://youtube.com/@darklightmod?si=zev3jbDSK34dEZKL"><button class="btn">YouTube</button></a>
+<a href="https://discord.gg/4mvjSKZXzG"><button class="btn">Discord</button></a>
+<a href="https://t.me/darklightmod"><button class="btn">Telegram</button></a>
+<a href="https://www.instagram.com/_rudra_owner_?igsh=bjY5MWV6NHZvYzg4"><button class="btn">Instagram</button></a>
 </div>
 
-
+<div class="footer">
+<a href="#" onclick="goTo('support')" style="color:cyan;">Customer Care</a>
+</div>
 
 <script>
 
-let selectedPrice=0
-let planType=""
+let historyStack = [];
+let selectedType = "";
 
+// 🔥 CHANGE ONLY HERE
 setTimeout(()=>{
-document.getElementById("verifyScreen").style.display="none"
-document.getElementById("mainMenu").classList.remove("hidden")
-},6000)
+document.getElementById("loader").style.display="none";
+show('main'); // <-- NEW PAGE
+},6000);
 
-
-
-function openNormal(){
-
-hideAll()
-
-document.getElementById("normalMods").classList.remove("hidden")
-
+function goTo(id){
+let current=document.querySelector('.active');
+if(current) historyStack.push(current.id);
+show(id);
 }
 
-
-function openGC(){
-
-hideAll()
-
-document.getElementById("gcMods").classList.remove("hidden")
-
+function goBack(){
+let prev=historyStack.pop();
+if(prev) show(prev);
 }
 
-
-
-function selectPlan(price,type){
-
-selectedPrice=price
-planType=type
-
-hideAll()
-
-document.getElementById("features").classList.remove("hidden")
-
-let list=document.getElementById("featureList")
-
-let features=`
-
-<div class="feature">> 𝙏𝙚𝙡𝙚𝙥𝙤𝙧𝙩 🌀</div>
-<div class="feature">> 𝘾𝙖𝙧 𝙁𝙡𝙮 ✈️</div>
-<div class="feature">> 𝙐𝙣𝙡𝙞𝙢𝙞𝙩𝙚𝙙 𝘼𝙧𝙢𝙤𝙧 🪖</div>
-<div class="feature">> 𝘼𝙡𝙡 𝙂𝙪𝙣𝙨 (RPG) 🔫</div>
-<div class="feature">> 𝘼𝙞𝙢𝙗𝙤𝙩 🎯</div>
-<div class="feature">> 𝙎𝙥𝙚𝙚𝙙 𝙃𝙖𝙘𝙠 ⚡</div>
-<div class="feature">> 𝙅𝙪𝙢𝙥 𝙃𝙖𝙘𝙠 💨</div>
-`
-
-if(type=="gc"){
-
-features+=`
-
-<div class="feature">> 𝙐𝙣𝙡𝙞𝙢𝙞𝙩𝙚𝙙 𝙂𝘾 🪙</div>
-<div class="feature">> 𝙐𝙣𝙡𝙞𝙢𝙞𝙩𝙚𝙙 💵</div>
-
-`
-
+function show(id){
+document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+document.getElementById(id).classList.add('active');
 }
 
-list.innerHTML=features
+function selectPlan(price,type,el){
+selectedType=type;
 
+document.querySelectorAll('.card').forEach(c=>c.classList.remove('selected'));
+el.classList.add('selected');
+
+document.getElementById("price").innerText="₹"+price;
+
+document.getElementById("cartBtn")?.removeAttribute("disabled");
+document.getElementById("cartBtn")?.classList.add("cart-active");
+document.getElementById("cartBtn2")?.removeAttribute("disabled");
+document.getElementById("cartBtn2")?.classList.add("cart-active");
+
+updateFeatures();
 }
 
+function updateFeatures(){
+let f1=document.getElementById("gcFeature1");
+let f2=document.getElementById("gcFeature2");
 
-
-function goPayment(){
-
-hideAll()
-
-document.getElementById("payment").classList.remove("hidden")
-
-document.getElementById("payAmount").innerText="Amount : ₹"+selectedPrice
-
-document.getElementById("qrImg").src=
-"https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi://pay?pa=anuragban@fam&pn=GrandRP&am="+selectedPrice
-
+if(selectedType==="gc"){
+f1.innerHTML='<span class="tick">✔ Unlimited GC 🪙</span>';
+f2.innerHTML='<span class="tick">✔ Unlimited Money 💵</span>';
+}else{
+f1.innerHTML='<span class="cross">✖ Unlimited GC</span>';
+f2.innerHTML='<span class="cross">✖ Unlimited Money</span>';
+}
 }
 
+let time=300;
+setInterval(()=>{
+if(document.getElementById("payment").classList.contains("active")){
+time--;
+let m=Math.floor(time/60);
+let s=time%60;
+document.getElementById("timer").innerText=
+(m<10?"0":"")+m+":"+(s<10?"0":"")+s;
 
-
-function hideAll(){
-
-document.getElementById("mainMenu").classList.add("hidden")
-document.getElementById("normalMods").classList.add("hidden")
-document.getElementById("gcMods").classList.add("hidden")
-document.getElementById("features").classList.add("hidden")
-document.getElementById("payment").classList.add("hidden")
-
+if(time==161){
+show('final');
 }
+}
+},1000);
 
 </script>
 
